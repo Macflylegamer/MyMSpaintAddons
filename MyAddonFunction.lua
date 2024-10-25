@@ -8,7 +8,7 @@ local ClearItemsGroupBox
 for groupName, groupbox in pairs(Tabs.AddonTab.Groupboxes) do
     print(groupName)
     if groupName == "Clear Items" then
-        ClearItemsGroupBox = groupbo
+        ClearItemsGroupBox = groupbox
     end
 end
 
