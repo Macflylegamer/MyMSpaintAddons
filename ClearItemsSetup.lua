@@ -1,4 +1,4 @@
--- Accepting the isAutoSetup argument
+-- Accepting the isManualSetup argument
 local function setupAddon(isManualSetup)
     local Tabs = {
         -- Creates a new tab titled Main
@@ -17,7 +17,7 @@ local function setupAddon(isManualSetup)
     print(ClearItemsGroupBox)
 
     ClearItemsGroupBox:AddToggle('MyToggle', {
-        Text = 'Update 8!',
+        Text = 'Update 8.5!',
         Default = true, -- Default value (true / false)
         Tooltip = 'This is a tooltip', -- Information shown when you hover over the toggle
 
