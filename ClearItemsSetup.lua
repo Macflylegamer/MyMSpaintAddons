@@ -25,7 +25,7 @@ end
 print(ClearItemsGroupBox)
 
 ClearItemsGroupBox:AddToggle('MyToggle', {
-    Text = 'Update 7!',
+    Text = 'Update 8!',
     Default = true, -- Default value (true / false)
     Tooltip = 'This is a tooltip', -- Information shown when you hover over the toggle
 
