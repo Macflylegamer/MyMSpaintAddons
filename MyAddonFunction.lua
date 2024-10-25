@@ -27,5 +27,5 @@ ClearItemsGroupBox:AddToggle('MyToggle', {
 
 local container = groupbox.Container
 for _, element in ipairs(container:GetChildren()) do
-print(element);
+    print(element);
 end
