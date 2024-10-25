@@ -3,7 +3,7 @@ local Tabs = {
     AddonTab = shared.Window.Tabs["Addons [BETA]"],
 }
 
-local ClearItemsGroupBox = Tabs.AddonTab.Groupboxes["ClearItems"]
+local ClearItemsGroupBox = Tabs.AddonTab.Groupboxes["Clear Items"]
 
 ClearItemsGroupBox:AddToggle('MyToggle', {
     Text = 'This is a toggle',
