@@ -28,7 +28,7 @@ local function setupAddon(isManualSetup)
     end
 
     ClearItemsGroupBox:AddToggle('MyToggle', {
-        Text = 'Update 8.75!',
+        Text = 'Update 8.85!',
         Default = true,
         Tooltip = 'This is a tooltip',
 
@@ -42,13 +42,13 @@ local function setupAddon(isManualSetup)
         local player = game.Players.LocalPlayer
         local backpack = player:FindFirstChild("Backpack")
         local character = player.Character
-
+    
         local itemNames = {}
-
+    
         -- Add items from backpack
         if backpack then
             for _, item in ipairs(backpack:GetChildren()) do
-                table.insert(itemNames, item.Name .. " [" .. item:GetDebugId() .. "]")
+                table.insert(itemNames, "'" .. item.Name .. " [" .. item:GetDebugId() .. "]" .. "'")
             end
         end
 
@@ -56,11 +56,11 @@ local function setupAddon(isManualSetup)
         if character then
             local tool = character:FindFirstChildOfClass("Tool")
             if tool then
-                table.insert(itemNames, tool.Name .. " [" .. tool:GetDebugId() .. "]")
+                table.insert(itemNames, "'" .. tool.Name .. " [" .. tool:GetDebugId() .. "]" .. "'")
             end
         end
 
-        -- Print all items in one line
+        -- Print all items in one line with single quotes around each
         print("Current Items in itemNames table: " .. table.concat(itemNames, ", "))
 
         -- Update the dropdown values
