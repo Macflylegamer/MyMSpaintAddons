@@ -3,11 +3,11 @@ local Tabs = {
     AddonTab = shared.Window.Tabs["Addons [BETA]"],
 }
 
-local ClearItemsGroupBox = Tabs.AddonTab.Groupboxes["ClearItems"]
+local ClearItemsGroupBox
 
 for groupName, groupbox in pairs(AddonTab.Groupboxes) do
     if groupName == "Clear Items" then
-        return groupbox
+        ClearItemsGroupBox = Tabs.AddonTab.Groupboxes["ClearItems"]
     end
 end
 
