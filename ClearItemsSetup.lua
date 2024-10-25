@@ -5,57 +5,88 @@ local function setupAddon(isManualSetup)
         AddonTab = shared.Window.Tabs["Addons [BETA]"],
     }
 
-    print(isManualSetup);
+    print(isManualSetup)
 
     local mode = isManualSetup and "Manual" or "Auto"
-    
     local ClearItemsGroupBox
 
     for groupName, groupbox in pairs(Tabs.AddonTab.Groupboxes) do
-        print(groupName)
         if groupName == "Clear Items " .. mode .. " Setup" then
             ClearItemsGroupBox = groupbox
         end
     end
-
-    print(ClearItemsGroupBox)
+    
+    -- Delete button if in manual setup
+    if isManualSetup then
+        for _, outerFrame in ipairs(ClearItemsGroupBox.Container:GetChildren()) do
+            local label = outerFrame:FindFirstChildOfClass('Frame') and outerFrame:FindFirstChildOfClass('Frame'):FindFirstChildWhichIsA('TextLabel')
+            if label and label.Text == "Setup Clear Items" then
+                outerFrame:Destroy()
+                break
+            end
+        end
+    end
 
     ClearItemsGroupBox:AddToggle('MyToggle', {
-        Text = 'Update 7!',
-        Default = true, -- Default value (true / false)
-        Tooltip = 'This is a tooltip', -- Information shown when you hover over the toggle
+        Text = 'Update 8!',
+        Default = true,
+        Tooltip = 'This is a tooltip',
 
         Callback = function(Value)
             print('[cb] MyToggle changed to:', Value)
         end
     })
 
-    -- Delete Button only if isAutoSetup is true
-    if isManualSetup then
-        for _, outerFrame in ipairs(ClearItemsGroupBox.Container:GetChildren()) do
-            local label = outerFrame:FindFirstChildOfClass('Frame') and outerFrame:FindFirstChildOfClass('Frame'):FindFirstChildWhichIsA('TextLabel')
-            if label and label.Text == "Setup Clear Items" then
-                outerFrame:Destroy()
-                ClearItemsGroupBox:Resize()
-                break
+    -- Function to update the dropdown list
+    local function UpdateDropdown()
+        local player = game.Players.LocalPlayer
+        local backpack = player:FindFirstChild("Backpack")
+        local character = player.Character
+
+        local itemNames = {}
+
+        -- Add items from backpack
+        if backpack then
+            for _, item in ipairs(backpack:GetChildren()) do
+                table.insert(itemNames, item.Name .. " [" .. item:GetDebugId() .. "]")
             end
         end
+
+        -- Add item in hand (if any)
+        if character then
+            local tool = character:FindFirstChildOfClass("Tool")
+            if tool then
+                table.insert(itemNames, tool.Name .. " [" .. tool:GetDebugId() .. "]")
+            end
+        end
+
+        -- Update the dropdown values
+        Options.ItemsToDelete.Values = itemNames
     end
 
-    -- Multi dropdowns
+    -- Multi dropdown for item deletion
     ClearItemsGroupBox:AddDropdown('MyMultiDropdown', {
-        Values = { 'This', 'is', 'a', 'dropdown' },
+        Values = {},  -- Populated dynamically
         Default = 1,
-        Multi = true, -- true / false, allows multiple choices to be selected
+        Multi = true,
+        Text = 'Items to Delete',
+        Tooltip = 'Select items to delete',
 
-        Text = 'A dropdown',
-        Tooltip = 'This is a tooltip', -- Information shown when you hover over the dropdown
-
-        Callback = function(Value)
-            print('[cb] Multi dropdown got changed:', Value)
+        Callback = function(SelectedItems)
+            print('[cb] Items selected for deletion:', SelectedItems)
         end
     })
+
+    -- Update dropdown initially
+    UpdateDropdown()
+
+    -- Monitor backpack and character changes
+    local player = game.Players.LocalPlayer
+    player.Backpack.ChildAdded:Connect(UpdateDropdown)
+    player.Backpack.ChildRemoved:Connect(UpdateDropdown)
+    player.Character.ChildAdded:Connect(UpdateDropdown)
+    player.Character.ChildRemoved:Connect(UpdateDropdown)
 end
 
--- Return the function so it can be called later
+-- Return the function to be called later
 return setupAddon
