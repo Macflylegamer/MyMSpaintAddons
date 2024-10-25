@@ -4,12 +4,12 @@ local Tabs = {
 }
 
 -- Function to check if auto setup is requested and return the appropriate string
-local function autoSetupRequested()
-    return arg[1] and arg[1] == true and "Auto" or "Manual"
+local function autoSetupRequested(isAuto)
+    return isAuto and "Auto" or "Manual"
 end
 
 -- Use the returned string to determine the setup type
-local setupType = autoSetupRequested()
+local setupType = autoSetupRequested(arg[1])  -- Pass the argument directly
 
 print(setupType);
 
@@ -25,7 +25,7 @@ end
 print(ClearItemsGroupBox)
 
 ClearItemsGroupBox:AddToggle('MyToggle', {
-    Text = 'Update 8!',
+    Text = 'Update 8.5!',
     Default = true, -- Default value (true / false)
     Tooltip = 'This is a tooltip', -- Information shown when you hover over the toggle
 
