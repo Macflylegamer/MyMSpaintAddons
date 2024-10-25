@@ -6,12 +6,14 @@ local function setupAddon(isManualSetup)
     }
 
     print(isManualSetup);
+
+    local mode = isManualSetup and "Manual" or "Auto"
     
     local ClearItemsGroupBox
 
     for groupName, groupbox in pairs(Tabs.AddonTab.Groupboxes) do
         print(groupName)
-        if groupName == "Clear Items" then
+        if groupName == "Clear Items " .. mode .. " Setup" then
             ClearItemsGroupBox = groupbox
         end
     end
@@ -19,7 +21,7 @@ local function setupAddon(isManualSetup)
     print(ClearItemsGroupBox)
 
     ClearItemsGroupBox:AddToggle('MyToggle', {
-        Text = 'Update 6!',
+        Text = 'Update 7!',
         Default = true, -- Default value (true / false)
         Tooltip = 'This is a tooltip', -- Information shown when you hover over the toggle
 
