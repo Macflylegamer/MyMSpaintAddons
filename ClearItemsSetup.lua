@@ -27,7 +27,7 @@ local function setupAddon(isManualSetup)
     end
 
     ClearItemsGroupBox:AddToggle('MyToggle', {
-        Text = 'Update 8.875!',
+        Text = 'Update 9!',
         Default = true,
         Tooltip = 'This is a tooltip',
 
@@ -47,7 +47,7 @@ local function setupAddon(isManualSetup)
         -- Add items from backpack
         if backpack then
             for _, item in ipairs(backpack:GetChildren()) do
-                table.insert(itemNames, "'" .. item.Name .. " [" .. item:GetDebugId() .. "]" .. "'")
+                table.insert(itemNames, item.Name .. " [" .. item:GetDebugId() .. "]")
             end
         end
 
@@ -55,11 +55,11 @@ local function setupAddon(isManualSetup)
         if character then
             local tool = character:FindFirstChildOfClass("Tool")
             if tool then
-                table.insert(itemNames, "'" .. tool.Name .. " [" .. tool:GetDebugId() .. "]" .. "'")
+                table.insert(itemNames, tool.Name .. " [" .. tool:GetDebugId() .. "]")
             end
         end
 
-        -- Print all items in one line with single quotes around each
+        -- Print all items in one line
         print("Current Items in itemNames table: " .. table.concat(itemNames, ", "))
 
         -- Update the dropdown values
@@ -79,6 +79,54 @@ local function setupAddon(isManualSetup)
         Callback = function(SelectedItems)
             print('[cb] Items selected for deletion:', SelectedItems)
         end
+    })
+
+    -- Button to delete selected items
+    ClearItemsGroupBox:AddButton('DeleteSelectedItemsButton', {
+        Text = 'Delete Selected Items', 
+        Func = function()
+            local selectedItems = Options.MyMultiDropdown.SelectedItems
+            local player = game.Players.LocalPlayer
+            local backpack = player:FindFirstChild("Backpack")
+            local character = player.Character
+    
+            for key, isSelected in next, selectedItems do
+                if isSelected then
+                    -- Extract the item name and DebugId from the key
+                    local itemName, itemDebugId = key:match("(.+)%s%[(%d+)%]")
+                    if itemName and itemDebugId then
+                        itemDebugId = tonumber(itemDebugId)
+                        print(itemDebugId);
+
+                        -- Check backpack for the item
+                        if backpack then
+                            for _, item in ipairs(backpack:GetChildren()) do
+                                if item.Name == itemName and item:GetDebugId() == itemDebugId then
+                                    item:Destroy()
+                                    print('Deleted item from backpack:', itemName)
+                                    break
+                                end
+                            end
+                        end
+
+                        -- Check character's tool in hand for the item
+                        if character then
+                            local tool = character:FindFirstChild(itemName)
+                            if tool and tool:GetDebugId() == itemDebugId then
+                                tool:Destroy()
+                                print('Deleted item from hand:', itemName)
+                                break
+                            end
+                        end
+                    end
+                end
+            end
+
+            -- Update dropdown after deletion
+            UpdateDropdown()
+        end,
+        DoubleClick = false,
+        Tooltip = 'This will delete the selected items'
     })
 
     -- Update dropdown initially
