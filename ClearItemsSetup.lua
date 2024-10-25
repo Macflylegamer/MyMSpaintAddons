@@ -28,7 +28,7 @@ local function setupAddon(isManualSetup)
     end
 
     ClearItemsGroupBox:AddToggle('MyToggle', {
-        Text = 'Update 8.5!',
+        Text = 'Update 8.65!',
         Default = true,
         Tooltip = 'This is a tooltip',
 
@@ -59,6 +59,9 @@ local function setupAddon(isManualSetup)
                 table.insert(itemNames, tool.Name .. " [" .. tool:GetDebugId() .. "]")
             end
         end
+
+        -- Print the itemNames table before updating
+        print("Current Items in itemNames table:", itemNames)
 
         -- Update the dropdown values
         Options.MyMultiDropdown.Values = itemNames
