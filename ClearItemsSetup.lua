@@ -1,4 +1,3 @@
--- Accepting the isManualSetup argument 
 local function setupAddon(isManualSetup)
     local Tabs = {
         -- Creates a new tab titled Main
@@ -28,7 +27,7 @@ local function setupAddon(isManualSetup)
     end
 
     ClearItemsGroupBox:AddToggle('MyToggle', {
-        Text = 'Update 8.85!',
+        Text = 'Update 8.875!',
         Default = true,
         Tooltip = 'This is a tooltip',
 
@@ -64,7 +63,9 @@ local function setupAddon(isManualSetup)
         print("Current Items in itemNames table: " .. table.concat(itemNames, ", "))
 
         -- Update the dropdown values
-        Options.MyMultiDropdown.Values = itemNames
+        Options.MyMultiDropdown.Values = itemNames  -- Update existing dropdown values
+        Options.MyMultiDropdown:BuildDropdownList()  -- Refresh the dropdown display
+        Options.MyMultiDropdown:Display()  -- Update the display
     end
 
     -- Multi dropdown for item deletion
