@@ -86,6 +86,9 @@ local function setupAddon(isManualSetup)
     Options.MyMultiDropdown:OnChanged(function()
         -- print('Dropdown got changed. New value:', )
         print('Multi dropdown got changed')
+        for key, value in next, Options.MyMultiDropdown.Value do
+            print(key, value) -- should print something like This, true
+        end
         selectedItems = Options.MyMultiDropdown.Value
         print("Current Items in selectedItems table: " .. table.concat(selectedItems, ", "))
     end)
