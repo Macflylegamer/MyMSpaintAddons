@@ -27,7 +27,7 @@ local function setupAddon(isManualSetup)
     end
 
     ClearItemsGroupBox:AddToggle('MyToggle', {
-        Text = 'Update 9.665!',
+        Text = 'Update 9.666!',
         Default = true,
         Tooltip = 'This is a tooltip',
 
