@@ -68,6 +68,8 @@ local function setupAddon(isManualSetup)
         Options.MyMultiDropdown:Display()  -- Update the display
     end
 
+    local selectedItems = {}
+
     -- Multi dropdown for item deletion
     ClearItemsGroupBox:AddDropdown('MyMultiDropdown', {
         Values = {},  -- Populated dynamically
@@ -76,8 +78,9 @@ local function setupAddon(isManualSetup)
         Text = 'Items to Delete',
         Tooltip = 'Select items to delete',
 
-        Callback = function(SelectedItems)
-            print('[cb] Items selected for deletion:', SelectedItems)
+        Callback = function(Value)
+            print('[cb] Items selected for deletion:', Value)
+            selectedItems = value
         end
     })
 
@@ -89,9 +92,9 @@ local function setupAddon(isManualSetup)
             local backpack = player:FindFirstChild("Backpack")
             local character = player.Character
 
-            print("Current Items in SelectedItems table: " .. table.concat(Options.MyMultiDropdown.SelectedItems, ", "))
+            print("Current Items in selectedItems table: " .. table.concat(selectedItems, ", "))
     
-            for key, isSelected in next, Options.MyMultiDropdown.SelectedItems do
+            for key, isSelected in next, selectedItems do
                 if isSelected then
                     -- Extract the item name and DebugId from the key
                     local itemName, itemDebugId = key:match("(.+)%s%[(%d+)%]")
