@@ -5,8 +5,10 @@ local Tabs = {
 
 local ClearItemsGroupBox = Tabs.AddonTab.Groupboxes["ClearItems"]
 
-for name, groupbox in pairs(Tabs.AddonTab.Groupboxes) do
-    print("Groupbox Name: " .. name, groupbox)
+for groupName, groupbox in pairs(AddonTab.Groupboxes) do
+    if groupName == "Clear Items" then
+        return groupbox
+    end
 end
 
 ClearItemsGroupBox:AddToggle('MyToggle', {
