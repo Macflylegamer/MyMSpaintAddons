@@ -16,7 +16,7 @@ end
 print(ClearItemsGroupBox)
 
 ClearItemsGroupBox:AddToggle('MyToggle', {
-    Text = 'Update 5!',
+    Text = 'Update 6!',
     Default = true, -- Default value (true / false)
     Tooltip = 'This is a tooltip', -- Information shown when you hover over the toggle
 
@@ -26,19 +26,16 @@ ClearItemsGroupBox:AddToggle('MyToggle', {
 })
 
 local container = ClearItemsGroupBox.Container
-for _, element in ipairs(container:GetChildren()) do
-    print("element : " .. element.name);
-    if element:IsA('Frame') or element:IsA('TextLabel') then
-        if element:IsA('TextLabel') then print(element.Text) end
-        for _, element1 in ipairs(element:GetChildren()) do
-            print("element1 : " .. element1.name);
-            if element1:IsA('Frame') or element1:IsA('TextLabel') then
-                if element1:IsA('TextLabel') then print(element1.Text) end
-                for _, element2 in ipairs(element1:GetChildren()) do
-                    if element2:IsA('TextLabel') then print(element2.Text) end
-                    print("element2 : " .. element2.name);
-                end
-            end
-        end
+for _, outerFrame in ipairs(container:GetChildren()) do
+    if outerFrame:IsA('Frame') then
+        local innerFrame = outerFrame:FindFirstChildOfClass('Frame')
+        if innerFrame then
+            local label = innerFrame:FindFirstChildWhichIsA('TextLabel')
+            if label and label.Text == "Setup Clear Items" then
+                outerFrame:Destroy()  -- Destroy the button's outer frame along with all children
+                groupbox:Resize()     -- Optional: Resize the groupbox if needed
+                break
+             end
+         end
     end
 end
