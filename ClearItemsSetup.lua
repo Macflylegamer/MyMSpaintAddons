@@ -5,6 +5,8 @@ local function setupAddon(isManualSetup)
         AddonTab = shared.Window.Tabs["Addons [BETA]"],
     }
 
+    print(isManualSetup);
+    
     local ClearItemsGroupBox
 
     for groupName, groupbox in pairs(Tabs.AddonTab.Groupboxes) do
@@ -17,7 +19,7 @@ local function setupAddon(isManualSetup)
     print(ClearItemsGroupBox)
 
     ClearItemsGroupBox:AddToggle('MyToggle', {
-        Text = 'Update 9!',
+        Text = 'Update 6!',
         Default = true, -- Default value (true / false)
         Tooltip = 'This is a tooltip', -- Information shown when you hover over the toggle
 
