@@ -82,7 +82,7 @@ local function setupAddon(isManualSetup)
     })
 
     -- Button to delete selected items
-    ClearItemsGroupBox:AddButton('DeleteSelectedItemsButton', {
+    local DeleteSelectedItemsButton = ClearItemsGroupBox:AddButton({
         Text = 'Delete Selected Items', 
         Func = function()
             local selectedItems = Options.MyMultiDropdown.SelectedItems
