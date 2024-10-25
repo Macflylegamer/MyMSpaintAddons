@@ -80,7 +80,7 @@ local function setupAddon(isManualSetup)
 
         Callback = function(Value)
             print('[cb] Items selected for deletion:', Value)
-            selectedItems = value
+            selectedItems = Value
         end
     })
 
