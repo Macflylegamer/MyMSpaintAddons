@@ -5,7 +5,7 @@ local Tabs = {
 
 local ClearItemsGroupBox
 
-for groupName, groupbox in pairs(AddonTab.Groupboxes) do
+for groupName, groupbox in pairs(Tabs.AddonTab.Groupboxes) do
     if groupName == "Clear Items" then
         ClearItemsGroupBox = Tabs.AddonTab.Groupboxes["ClearItems"]
     end
