@@ -27,7 +27,7 @@ local function setupAddon(isManualSetup)
     end
 
     ClearItemsGroupBox:AddToggle('MyToggle', {
-        Text = 'Update 9.666.575!',
+        Text = 'Update 9.666.585!',
         Default = true,
         Tooltip = 'This is a tooltip',
 
@@ -93,6 +93,7 @@ local function setupAddon(isManualSetup)
         for key, value in next, Options.MyMultiDropdown.Value do
             print(key, value) -- should print something like This, true
         end
+        print("Current Items in Options.MyMultiDropdown.Value table: " .. table.concat(Options.MyMultiDropdown.Value, ", "))
     end)
     
     -- Button to delete selected items
@@ -103,9 +104,9 @@ local function setupAddon(isManualSetup)
             local backpack = player:FindFirstChild("Backpack")
             local character = player.Character
 
-            print("Current Items in selectedItems table: " .. table.concat(selectedItems, ", "))
+            print("Current Items in selectedItems table: " .. table.concat(Options.MyMultiDropdown.Value, ", "))
     
-            for key, isSelected in next, selectedItems do
+            for key, isSelected in next, Options.MyMultiDropdown.Value do
                 if isSelected then
                     -- Extract the item name and DebugId from the key
                     local itemName, itemDebugId = key:match("(.+)%s%[(%d+)%]")
