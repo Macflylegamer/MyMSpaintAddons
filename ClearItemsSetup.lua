@@ -28,7 +28,7 @@ local function setupAddon(isManualSetup)
     end
 
     ClearItemsGroupBox:AddToggle('MyToggle', {
-        Text = 'Update 8!',
+        Text = 'Update 8.5!',
         Default = true,
         Tooltip = 'This is a tooltip',
 
@@ -61,7 +61,7 @@ local function setupAddon(isManualSetup)
         end
 
         -- Update the dropdown values
-        Options.ItemsToDelete.Values = itemNames
+        Options.MyMultiDropdown.Values = itemNames
     end
 
     -- Multi dropdown for item deletion
