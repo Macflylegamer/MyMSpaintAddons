@@ -27,7 +27,7 @@ local function setupAddon(isManualSetup)
     end
 
     ClearItemsGroupBox:AddToggle('MyToggle', {
-        Text = 'Update 9.666.6!',
+        Text = 'Update 9.666.3!',
         Default = true,
         Tooltip = 'This is a tooltip',
 
@@ -80,10 +80,16 @@ local function setupAddon(isManualSetup)
 
         Callback = function(Value)
             print('[cb] Items selected for deletion:', Value)
-            selectedItems = Value
         end
     })
-
+    
+    Options.MyMultiDropdown:OnChanged(function()
+        -- print('Dropdown got changed. New value:', )
+        print('Multi dropdown got changed')
+        selectedItems = Options.MyMultiDropdown.Value
+        print("Current Items in selectedItems table: " .. table.concat(selectedItems, ", "))
+    end)
+    
     -- Button to delete selected items
     local DeleteSelectedItemsButton = ClearItemsGroupBox:AddButton({
         Text = 'Delete Selected Items', 
