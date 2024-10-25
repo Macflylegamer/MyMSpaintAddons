@@ -89,7 +89,7 @@ local function setupAddon(isManualSetup)
             local backpack = player:FindFirstChild("Backpack")
             local character = player.Character
 
-            print("Current Items in SelectedItems table: " .. table.concat(SelectedItems, ", "))
+            print("Current Items in SelectedItems table: " .. table.concat(Options.MyMultiDropdown.SelectedItems, ", "))
     
             for key, isSelected in next, Options.MyMultiDropdown.SelectedItems do
                 if isSelected then
