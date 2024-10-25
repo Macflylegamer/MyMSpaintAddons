@@ -8,7 +8,6 @@ local ClearItemsGroupBox
 for groupName, groupbox in pairs(Tabs.AddonTab.Groupboxes) do
     print(groupName)
     if groupName == "Clear Items" then
-        print("Found It!");
         ClearItemsGroupBox = groupbox
     end
 end
@@ -16,7 +15,7 @@ end
 print(ClearItemsGroupBox)
 
 ClearItemsGroupBox:AddToggle('MyToggle', {
-    Text = 'Update 6.5!',
+    Text = 'Update 6.75!',
     Default = true, -- Default value (true / false)
     Tooltip = 'This is a tooltip', -- Information shown when you hover over the toggle
 
@@ -25,17 +24,11 @@ ClearItemsGroupBox:AddToggle('MyToggle', {
     end
 })
 
-local container = ClearItemsGroupBox.Container
-for _, outerFrame in ipairs(container:GetChildren()) do
-    if outerFrame:IsA('Frame') then
-        local innerFrame = outerFrame:FindFirstChildOfClass('Frame')
-        if innerFrame then
-            local label = innerFrame:FindFirstChildWhichIsA('TextLabel')
-            if label and label.Text == "Setup Clear Items" then
-                outerFrame:Destroy()  -- Destroy the button's outer frame along with all children
-                ClearItemsGroupBox:Resize()     -- Optional: Resize the groupbox if needed
-                break
-             end
-         end
+for _, outerFrame in ipairs(ClearItemsGroupBox.Container:GetChildren()) do
+    local label = outerFrame:FindFirstChildOfClass('Frame') and outerFrame:FindFirstChildOfClass('Frame'):FindFirstChildWhichIsA('TextLabel')
+    if label and label.Text == "Setup Clear Items" then
+        outerFrame:Destroy()
+        ClearItemsGroupBox:Resize()
+        break
     end
 end
