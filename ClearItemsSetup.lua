@@ -27,7 +27,7 @@ local function setupAddon(isManualSetup)
     end
 
     ClearItemsGroupBox:AddToggle('MyToggle', {
-        Text = 'Update 9.65!',
+        Text = 'Update 9.66!',
         Default = true,
         Tooltip = 'This is a tooltip',
 
@@ -88,6 +88,8 @@ local function setupAddon(isManualSetup)
             local player = game.Players.LocalPlayer
             local backpack = player:FindFirstChild("Backpack")
             local character = player.Character
+
+            print("Current Items in SelectedItems table: " .. table.concat(SelectedItems, ", "))
     
             for key, isSelected in next, Options.MyMultiDropdown.SelectedItems do
                 if isSelected then
