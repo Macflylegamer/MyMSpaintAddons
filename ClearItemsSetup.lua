@@ -1,15 +1,18 @@
 -- Accepting the isManualSetup argument
-local function setupAddon(isManualSetup)
+local function setupAddon(isManualSetup, window)
     local Tabs = {
         -- Creates a new tab titled Main
-        AddonTab = shared.Window.Tabs["Addons [BETA]"],
+        AddonTab = window.Tabs["Addons [BETA]"],
     }
+
+    if AddonTab ~= nil then print("Found Tab!")
 
     local ClearItemsGroupBox
 
     for groupName, groupbox in pairs(Tabs.AddonTab.Groupboxes) do
         print(groupName)
         if groupName == "Clear Items" then
+            print("Found GroupBox!")
             ClearItemsGroupBox = groupbox
         end
     end
@@ -17,7 +20,7 @@ local function setupAddon(isManualSetup)
     print(ClearItemsGroupBox)
 
     ClearItemsGroupBox:AddToggle('MyToggle', {
-        Text = 'Update 8.5!',
+        Text = 'Update 9!',
         Default = true, -- Default value (true / false)
         Tooltip = 'This is a tooltip', -- Information shown when you hover over the toggle
 
