@@ -3,21 +3,26 @@ local Tabs = {
     AddonTab = shared.Window.Tabs["Addons [BETA]"],
 }
 
+-- Function to check if auto setup is requested and return the appropriate string
+local function autoSetupRequested()
+    return arg[1] and arg[1] == true and "Auto" or "Manual"
+end
+
+-- Use the returned string to determine the setup type
+local setupType = autoSetupRequested()
+
+print(setupType);
+
 local ClearItemsGroupBox
 
 for groupName, groupbox in pairs(Tabs.AddonTab.Groupboxes) do
     print(groupName)
-    if groupName == "Clear Items" then
+    if groupName == "Clear Items " .. setupType .. " Setup" then
         ClearItemsGroupBox = groupbox
     end
 end
 
 print(ClearItemsGroupBox)
-
--- Check if manual setup is requested
-local function manualSetupRequested()
-    return arg[1] and arg[1] == true -- Check if the first argument is true
-end
 
 ClearItemsGroupBox:AddToggle('MyToggle', {
     Text = 'Update 7!',
@@ -29,8 +34,8 @@ ClearItemsGroupBox:AddToggle('MyToggle', {
     end
 })
 
--- Delete Button based on the manual setup value
-if manualSetupRequested() then
+if setupType == "Manual" then
+    -- Delete Button if auto setup is requested
     for _, outerFrame in ipairs(ClearItemsGroupBox.Container:GetChildren()) do
         local label = outerFrame:FindFirstChildOfClass('Frame') and outerFrame:FindFirstChildOfClass('Frame'):FindFirstChildWhichIsA('TextLabel')
         if label and label.Text == "Setup Clear Items" then
