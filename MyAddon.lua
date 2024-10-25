@@ -14,10 +14,10 @@ local Addon = {
 	Elements = {
 		{
 			Type = "Button",
-			Name = "ClearItemsButton",
+			Name = "SetupButton",
 			Arguments = {
-				Text = 'Clear items',
-				Tooltip = 'Removes all items from the player\'s backpack and the item in hand',
+				Text = 'Setup Clear Items',
+				Tooltip = 'Setup the Clear Items addon (because dropdown is broken using the normal thing)',
 
 				Func = function()
 					loadstring(game:HttpGet("https://raw.githubusercontent.com/Macflylegamer/MyMSpaintAddons/refs/heads/main/MyAddonFunction.lua"))()
