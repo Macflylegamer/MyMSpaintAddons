@@ -5,9 +5,7 @@ local Tabs = {
 
 local ClearItemsGroupBox = Tabs.AddonTab.Groupboxes["ClearItems"]
 
-print(Tabs.AddonTab.Groupboxes);
-
-print(ClearItemsGroupBox);
+print("Groupboxes : " .. Tabs.AddonTab.Groupboxes);
 
 ClearItemsGroupBox:AddToggle('MyToggle', {
     Text = 'This is a toggle',
