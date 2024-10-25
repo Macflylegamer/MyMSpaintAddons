@@ -16,7 +16,7 @@ end
 print(ClearItemsGroupBox)
 
 ClearItemsGroupBox:AddToggle('MyToggle', {
-    Text = 'Update 3!',
+    Text = 'Update 4!',
     Default = true, -- Default value (true / false)
     Tooltip = 'This is a tooltip', -- Information shown when you hover over the toggle
 
@@ -27,10 +27,15 @@ ClearItemsGroupBox:AddToggle('MyToggle', {
 
 local container = ClearItemsGroupBox.Container
 for _, element in ipairs(container:GetChildren()) do
-    print(element);
+    print("element : " .. element);
     if element:IsA('Frame') or element:IsA('TextLabel') then
         for _, element1 in ipairs(element:GetChildren()) do
-            print(element1);
+            print("element1 : " .. element1);
+            if element:IsA('Frame') or element:IsA('TextLabel') then
+                for _, element2 in ipairs(element1:GetChildren()) do
+                    print("element2 : " .. element1);
+                end
+            end
         end
     end
 end
