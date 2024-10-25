@@ -27,7 +27,7 @@ local function setupAddon(isManualSetup)
     end
 
     ClearItemsGroupBox:AddToggle('MyToggle', {
-        Text = 'Update 9.666.585!',
+        Text = 'Update 9.666.595!',
         Default = true,
         Tooltip = 'This is a tooltip',
 
@@ -81,8 +81,8 @@ local function setupAddon(isManualSetup)
         Callback = function(Value)
             Options.MyMultiDropdown.Value = Value
             print('Multi dropdown got changed')
-            for key, value in next, Value do
-                print(key, value) -- should print something like This, true
+            for key, value in next, Options.MyMultiDropdown.Value do
+                print(key .. ", " .. value) -- should print something like This, true
             end
         end
     })
@@ -91,9 +91,8 @@ local function setupAddon(isManualSetup)
         -- print('Dropdown got changed. New value:', )
         print('Multi dropdown got changed2:')
         for key, value in next, Options.MyMultiDropdown.Value do
-            print(key, value) -- should print something like This, true
+            print(key .. ", " .. value) -- should print something like This, true
         end
-        print("Current Items in Options.MyMultiDropdown.Value table: " .. table.concat(Options.MyMultiDropdown.Value, ", "))
     end)
     
     -- Button to delete selected items
@@ -104,7 +103,10 @@ local function setupAddon(isManualSetup)
             local backpack = player:FindFirstChild("Backpack")
             local character = player.Character
 
-            print("Current Items in selectedItems table: " .. table.concat(Options.MyMultiDropdown.Value, ", "))
+            print("Current Items in selectedItems table: ")
+            for key, value in next, Options.MyMultiDropdown.Value do
+                print(key .. ", " .. value) -- should print something like This, true
+            end
     
             for key, isSelected in next, Options.MyMultiDropdown.Value do
                 if isSelected then
