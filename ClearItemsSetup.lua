@@ -27,7 +27,7 @@ local function setupAddon(isManualSetup)
     end
 
     ClearItemsGroupBox:AddToggle('MyToggle', {
-        Text = 'Update 9.5!',
+        Text = 'Update 9.65!',
         Default = true,
         Tooltip = 'This is a tooltip',
 
@@ -85,12 +85,11 @@ local function setupAddon(isManualSetup)
     local DeleteSelectedItemsButton = ClearItemsGroupBox:AddButton({
         Text = 'Delete Selected Items', 
         Func = function()
-            local selectedItems = Options.MyMultiDropdown.SelectedItems
             local player = game.Players.LocalPlayer
             local backpack = player:FindFirstChild("Backpack")
             local character = player.Character
     
-            for key, isSelected in next, selectedItems do
+            for key, isSelected in next, Options.MyMultiDropdown.SelectedItems do
                 if isSelected then
                     -- Extract the item name and DebugId from the key
                     local itemName, itemDebugId = key:match("(.+)%s%[(%d+)%]")
