@@ -25,19 +25,7 @@ ClearItemsGroupBox:AddToggle('MyToggle', {
     end
 })
 
-for _, child in ipairs(ClearItemsGroupBox.Container:GetChildren()) do
-        if child:IsA("Frame") and child:FindFirstChild("Label") then
-            local label = child.Label
-            print(label.Text);
-        end
-end
-
-for _, child in ipairs(ClearItemsGroupBox.Container:GetChildren()) do
-        if child:IsA("Frame") and child:FindFirstChild("Label") then
-            local label = child.Label
-            if label.Text == "Setup Clear Items" then
-                child:Destroy() -- Remove the button
-                break -- Exit the loop after removing the button
-            end
-        end
+local container = groupbox.Container
+for _, element in ipairs(container:GetChildren()) do
+print(element);
 end
