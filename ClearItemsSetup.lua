@@ -44,7 +44,7 @@ local function setupAddon(isManualSetup)
                         end
                     elseif tabArea:IsA("TextLabel") and targetTexts[tabArea.Text] then
                         -- If tabArea itself is a TextLabel with target text, print its text
-                        print("Found TextLabel in MainSection with text:", tabArea.Text)
+                        print("Found TextLabel in MainSection with text:", tabArea.Text, tabArea:GetDebugId())
                     end
                 end
             elseif mainSection:IsA("TextLabel") and targetTexts[mainSection.Text] then
@@ -95,7 +95,7 @@ local function setupAddon(isManualSetup)
     end
 
     ClearItemsGroupBox:AddToggle('MyToggle', {
-        Text = 'Update 9.666.66535!',
+        Text = 'Update 9.666.665375!',
         Default = true,
         Tooltip = 'This is a tooltip',
 
