@@ -17,6 +17,7 @@ local function setupAddon(isManualSetup)
 
     function FindTabContainer()
         for _, data in ipairs(shared.Library.Registry) do
+            print(data.Instance.Name);
             if data.Instance.Name == "TabContainer" then  -- Assuming you have a name or some unique property
                 return data.Instance
             end
@@ -64,7 +65,7 @@ local function setupAddon(isManualSetup)
     end
     
     ClearItemsGroupBox:AddToggle('MyToggle', {
-        Text = 'Update 9.666.6645!',
+        Text = 'Update 9.666.66465!',
         Default = true,
         Tooltip = 'This is a tooltip',
 
