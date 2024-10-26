@@ -26,13 +26,13 @@ local function setupAddon(isManualSetup)
         end
         local container = ClearItemsGroupBox.Container
         for _, element1 in ipairs(container:GetChildren()) do
-            print("element1 : " .. element1)
+            print("element1 : " .. element1.name)
             for _, element2 in ipairs(element1:GetChildren()) do
-                print("element2 : " .. element2)
+                print("element2 : " .. element2.name)
                 for _, element3 in ipairs(element2:GetChildren()) do
-                    print("element3 : " .. element3)
+                    print("element3 : " .. element3.name)
                     for _, element4 in ipairs(element3:GetChildren()) do
-                        print("element4 : " .. element4)
+                        print("element4 : " .. element4.name)
                     end
                 end
             end
@@ -40,7 +40,7 @@ local function setupAddon(isManualSetup)
     end
 
     ClearItemsGroupBox:AddToggle('MyToggle', {
-        Text = 'Update 9.666.663!',
+        Text = 'Update 9.666.6635!',
         Default = true,
         Tooltip = 'This is a tooltip',
 
