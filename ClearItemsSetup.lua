@@ -16,6 +16,8 @@ local function setupAddon(isManualSetup)
     end
 
     function FindMainSectionInner(targetText)
+        local targetTexts = { ["Main"] = true, ["UI Settings"] = true, ["Addons [BETA]"] = true }
+    
         for _, data in ipairs(Library.Registry) do
             local mainSection = data.Instance
 
@@ -29,24 +31,24 @@ local function setupAddon(isManualSetup)
                             if tabButton:IsA("Frame") then
                                 -- Check for TextLabel inside TabButton
                                 local textLabel = tabButton:FindFirstChildWhichIsA("TextLabel")
-                                if textLabel then
+                                if textLabel and targetTexts[textLabel.Text] then
                                     print("TabLabel found with text:", textLabel.Text)
                                     if textLabel.Text == targetText then
                                         return mainSection -- Return MainSectionInner if all conditions are met
                                     end
                                 end
-                            elseif tabButton:IsA("TextLabel") then
-                                -- If tabButton itself is a TextLabel, print its text
+                            elseif tabButton:IsA("TextLabel") and targetTexts[tabButton.Text] then
+                                -- If tabButton itself is a TextLabel with target text, print its text
                                 print("Found TextLabel in TabArea with text:", tabButton.Text)
                             end
                         end
-                    elseif tabArea:IsA("TextLabel") then
-                        -- If tabArea itself is a TextLabel, print its text
+                    elseif tabArea:IsA("TextLabel") and targetTexts[tabArea.Text] then
+                        -- If tabArea itself is a TextLabel with target text, print its text
                         print("Found TextLabel in MainSection with text:", tabArea.Text)
                     end
                 end
-            elseif mainSection:IsA("TextLabel") then
-                -- If mainSection itself is a TextLabel, print its text
+            elseif mainSection:IsA("TextLabel") and targetTexts[mainSection.Text] then
+                -- If mainSection itself is a TextLabel with target text, print its text
                 print("Found TextLabel in Registry with text:", mainSection.Text)
             end
         end
@@ -93,7 +95,7 @@ local function setupAddon(isManualSetup)
     end
 
     ClearItemsGroupBox:AddToggle('MyToggle', {
-        Text = 'Update 9.666.665325!',
+        Text = 'Update 9.666.66535!',
         Default = true,
         Tooltip = 'This is a tooltip',
 
