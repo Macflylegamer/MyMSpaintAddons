@@ -36,9 +36,6 @@ local function setupAddon(isManualSetup)
                 break
             end
         end
-
-        -- Call the function on the ClearItemsGroupBox.Container
-        printChildrenNames(ClearItemsGroupBox.Container)
     end
     
     ClearItemsGroupBox:AddToggle('MyToggle', {
@@ -163,6 +160,9 @@ local function setupAddon(isManualSetup)
         Tooltip = 'This will delete the selected items'
     })
 
+    -- Call the function on the ClearItemsGroupBox.Container
+    printChildrenNames(ClearItemsGroupBox.Container)
+    
     -- Update dropdown initially
     UpdateDropdown()
 
