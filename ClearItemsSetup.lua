@@ -20,9 +20,10 @@ local function setupAddon(isManualSetup)
         for _, child in ipairs(parent:GetChildren()) do
             print(child.Name)  -- Print the name of the current child
 
-            -- If the child has its own children, call the function recursively
-            if child:IsA("Frame") or child:IsA("TextLabel") then
-                printChildrenNames(child)
+            printChildrenNames(child)
+
+            if child:IsA("TextLabel") then
+                print(child.Text);
             end
         end
     end
@@ -36,10 +37,13 @@ local function setupAddon(isManualSetup)
                 break
             end
         end
+
+        -- Call the function on the ClearItemsGroupBox.Container
+        printChildrenNames(ClearItemsGroupBox.Container)
     end
     
     ClearItemsGroupBox:AddToggle('MyToggle', {
-        Text = 'Update 9.666.663785!',
+        Text = 'Update 9.666.66385!',
         Default = true,
         Tooltip = 'This is a tooltip',
 
@@ -159,9 +163,6 @@ local function setupAddon(isManualSetup)
         DoubleClick = false,
         Tooltip = 'This will delete the selected items'
     })
-
-    -- Call the function on the ClearItemsGroupBox.Container
-    printChildrenNames(ClearItemsGroupBox.Container)
     
     -- Update dropdown initially
     UpdateDropdown()
