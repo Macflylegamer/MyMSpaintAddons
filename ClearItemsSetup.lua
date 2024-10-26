@@ -27,7 +27,7 @@ local function setupAddon(isManualSetup)
     end
 
     ClearItemsGroupBox:AddToggle('MyToggle', {
-        Text = 'Update 9.666.595!',
+        Text = 'Update 9.666.596!',
         Default = true,
         Tooltip = 'This is a tooltip',
 
@@ -82,7 +82,7 @@ local function setupAddon(isManualSetup)
             Options.MyMultiDropdown.Value = Value
             print('Multi dropdown got changed')
             for key, value in next, Options.MyMultiDropdown.Value do
-                print(key .. ", " .. value) -- should print something like This, true
+                print(key, value) -- should print something like This, true
             end
         end
     })
@@ -91,7 +91,7 @@ local function setupAddon(isManualSetup)
         -- print('Dropdown got changed. New value:', )
         print('Multi dropdown got changed2:')
         for key, value in next, Options.MyMultiDropdown.Value do
-            print(key .. ", " .. value) -- should print something like This, true
+            print(key, value) -- should print something like This, true
         end
     end)
     
@@ -105,7 +105,7 @@ local function setupAddon(isManualSetup)
 
             print("Current Items in selectedItems table: ")
             for key, value in next, Options.MyMultiDropdown.Value do
-                print(key .. ", " .. value) -- should print something like This, true
+                print(key, value) -- should print something like This, true
             end
     
             for key, isSelected in next, Options.MyMultiDropdown.Value do
