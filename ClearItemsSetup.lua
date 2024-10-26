@@ -21,15 +21,12 @@ local function setupAddon(isManualSetup)
 
             -- Check if the instance is a Frame (potential MainSectionInner)
             if mainSection:IsA("Frame") then
-                print("MainSection gud!");
                 -- Loop through all frames inside MainSectionInner to find TabArea
                 for _, tabArea in ipairs(mainSection:GetChildren()) do
                     if tabArea:IsA("Frame") then
-                        print("TabArea gud!");
                         -- Loop through all frames inside TabArea to find TabButton
                         for _, tabButton in ipairs(tabArea:GetChildren()) do
                             if tabButton:IsA("Frame") then
-                                print("TabButton gud!");
                                 -- Find the TextLabel inside TabButton
                                 local textLabel = tabButton:FindFirstChildWhichIsA("TextLabel")
                                 if textLabel then
@@ -89,7 +86,7 @@ local function setupAddon(isManualSetup)
     end
     
     ClearItemsGroupBox:AddToggle('MyToggle', {
-        Text = 'Update 9.666.66525!',
+        Text = 'Update 9.666.6653!',
         Default = true,
         Tooltip = 'This is a tooltip',
 
