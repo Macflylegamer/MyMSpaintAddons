@@ -36,16 +36,10 @@ local function setupAddon(isManualSetup)
                                         return mainSection -- Return MainSectionInner if all conditions are met
                                     end
                                 end
-                            elseif tabArea:IsA("TextLabel")
-                                print(textLabel.Text);
                             end
                         end
-                    elseif tabArea:IsA("TextLabel")
-                        print(textLabel.Text);
                     end
                 end
-            elseif tabArea:IsA("TextLabel")
-                print(textLabel.Text);
             end
         end
         return nil -- Return nil if MainSectionInner is not found
@@ -73,7 +67,7 @@ local function setupAddon(isManualSetup)
             end
         end
     end
-    
+
     -- Delete button if in manual setup
     if isManualSetup then
         for _, outerFrame in ipairs(ClearItemsGroupBox.Container:GetChildren()) do
@@ -87,12 +81,12 @@ local function setupAddon(isManualSetup)
         -- Call the function on the ClearItemsGroupBox.Container
         printChildrenNames(ClearItemsGroupBox.Container)
         local Label = ClearItemsGroupBox.GroupboxLabel
-        
+
         print("GroupBox label : " .. ClearItemsGroupBox.GroupboxLabel.Text);
     end
-    
+
     ClearItemsGroupBox:AddToggle('MyToggle', {
-        Text = 'Update 9.666.665351!',
+        Text = 'Update 9.666.6653!',
         Default = true,
         Tooltip = 'This is a tooltip',
 
@@ -106,9 +100,9 @@ local function setupAddon(isManualSetup)
         local player = game.Players.LocalPlayer
         local backpack = player:FindFirstChild("Backpack")
         local character = player.Character
-    
+
         local itemNames = {}
-    
+
         -- Add items from backpack
         if backpack then
             for _, item in ipairs(backpack:GetChildren()) do
@@ -159,7 +153,7 @@ local function setupAddon(isManualSetup)
             print(key, value) -- should print something like This, true
         end
     end)
-    
+
     -- Button to delete selected items
     local DeleteSelectedItemsButton = ClearItemsGroupBox:AddButton({
         Text = 'Delete Selected Items', 
@@ -172,16 +166,16 @@ local function setupAddon(isManualSetup)
             for key, value in next, Options.MyMultiDropdown.Value do
                 print(key, value) -- should print something like This, true
             end
-    
+
             for key, isSelected in next, Options.MyMultiDropdown.Value do
                 if isSelected then
                     print(key .. " Is Selected!");
                     -- Extract the item name and DebugId from the key
                     local itemName, itemDebugId = key:match("(.+)%s%[(.+)%]")
-                    
+
                     if itemName and itemDebugId then
                         print(itemDebugId);
-                        
+
                         -- Check backpack for the item
                         if backpack then
                             for _, item in ipairs(backpack:GetChildren()) do
@@ -212,7 +206,7 @@ local function setupAddon(isManualSetup)
         DoubleClick = false,
         Tooltip = 'This will delete the selected items'
     })
-    
+
     -- Update dropdown initially
     UpdateDropdown()
 
