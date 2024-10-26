@@ -27,7 +27,7 @@ local function setupAddon(isManualSetup)
     end
 
     ClearItemsGroupBox:AddToggle('MyToggle', {
-        Text = 'Update 9.666.597!',
+        Text = 'Update 9.666.5971!',
         Default = true,
         Tooltip = 'This is a tooltip',
 
@@ -113,9 +113,9 @@ local function setupAddon(isManualSetup)
                     print(key .. " Is Selected!");
                     -- Extract the item name and DebugId from the key
                     local itemName, itemDebugId = key:match("(.+)%s%[(%d+)%]")
+                    print(itemDebugId);
                     if itemName and itemDebugId then
                         itemDebugId = tonumber(itemDebugId)
-                        print(itemDebugId);
 
                         -- Check backpack for the item
                         if backpack then
