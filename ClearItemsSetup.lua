@@ -28,7 +28,6 @@ local function setupAddon(isManualSetup)
     end
 
     renameGroupbox(ClearItemsGroupBox, "FUCK YEAH!!! IT WOOOORKS!!!!!!")
-    3
 
     -- Delete button if in manual setup
     if isManualSetup then
@@ -48,7 +47,7 @@ local function setupAddon(isManualSetup)
     end
 
     ClearItemsGroupBox:AddToggle('MyToggle', {
-        Text = 'Update 9.666.6654!',
+        Text = 'Update 9.666.665415!',
         Default = true,
         Tooltip = 'This is a tooltip',
 
