@@ -14,6 +14,9 @@ local function setupAddon(isManualSetup)
             ClearItemsGroupBox = groupbox
         end
     end
+
+    -- Call the function on the ClearItemsGroupBox.Container
+    printChildrenNames(ClearItemsGroupBox.Container)
     
     -- Delete button if in manual setup
     if isManualSetup then
@@ -24,9 +27,6 @@ local function setupAddon(isManualSetup)
                 break
             end
         end
-        
-        -- Call the function on the ClearItemsGroupBox.Container
-        printChildrenNames(ClearItemsGroupBox.Container)
     end
 
     -- Recursive function to print names of all children and their descendants
@@ -42,7 +42,7 @@ local function setupAddon(isManualSetup)
     end
     
     ClearItemsGroupBox:AddToggle('MyToggle', {
-        Text = 'Update 9.666.66375!',
+        Text = 'Update 9.666.66376!',
         Default = true,
         Tooltip = 'This is a tooltip',
 
