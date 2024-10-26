@@ -32,10 +32,12 @@ local function setupAddon(isManualSetup)
                                 print("TabButton gud!");
                                 -- Find the TextLabel inside TabButton
                                 local textLabel = tabButton:FindFirstChildWhichIsA("TextLabel")
-                                print("TabLabel gud!");
-                                print(textLabel.Text);
-                                if textLabel and textLabel.Text == targetText then
-                                    return mainSection -- Return MainSectionInner if all conditions are met
+                                if textLabel then
+                                    print("TabLabel gud!");
+                                    print(textLabel.Text);
+                                    if textLabel.Text == targetText then
+                                        return mainSection -- Return MainSectionInner if all conditions are met
+                                    end
                                 end
                             end
                         end
@@ -87,7 +89,7 @@ local function setupAddon(isManualSetup)
     end
     
     ClearItemsGroupBox:AddToggle('MyToggle', {
-        Text = 'Update 9.666.66515!',
+        Text = 'Update 9.666.66525!',
         Default = true,
         Tooltip = 'This is a tooltip',
 
