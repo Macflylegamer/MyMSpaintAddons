@@ -113,14 +113,14 @@ local function setupAddon(isManualSetup)
                     print(key .. " Is Selected!");
                     -- Extract the item name and DebugId from the key
                     local itemName, itemDebugId = key:match("(.+)%s%[(.+)%]")
-                    print(itemDebugId);
+                    
                     if itemName and itemDebugId then
-                        itemDebugId = tonumber(itemDebugId)
-
+                        print(itemDebugId);
+                        
                         -- Check backpack for the item
                         if backpack then
                             for _, item in ipairs(backpack:GetChildren()) do
-                                if item.Name == itemName and item:GetDebugId() == itemDebugId then
+                                if item:GetDebugId() == itemDebugId then
                                     item:Destroy()
                                     print('Deleted item from backpack:', itemName)
                                     break
