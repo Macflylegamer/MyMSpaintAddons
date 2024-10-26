@@ -15,67 +15,20 @@ local function setupAddon(isManualSetup)
         end
     end
 
-    function FindMainSectionInner(targetText)
-        local targetTexts = { ["Main"] = true, ["UI Settings"] = true, ["Addons [BETA]"] = true }
-    
-        for _, data in ipairs(Library.Registry) do
-            local mainSection = data.Instance
-
-            -- Check if the instance is a Frame (potential MainSectionInner)
-            if mainSection:IsA("Frame") then
-                -- Loop through all frames inside MainSectionInner to find TabArea
-                for _, tabArea in ipairs(mainSection:GetChildren()) do
-                    if tabArea:IsA("Frame") then
-                        -- Loop through all frames inside TabArea to find TabButton
-                        for _, tabButton in ipairs(tabArea:GetChildren()) do
-                            if tabButton:IsA("Frame") then
-                                -- Check for TextLabel inside TabButton
-                                local textLabel = tabButton:FindFirstChildWhichIsA("TextLabel")
-                                if textLabel and targetTexts[textLabel.Text] then
-                                    print("TabLabel found with text:", textLabel.Text)
-                                    if textLabel.Text == targetText then
-                                        return mainSection -- Return MainSectionInner if all conditions are met
-                                    end
-                                end
-                            elseif tabButton:IsA("TextLabel") and targetTexts[tabButton.Text] then
-                                -- If tabButton itself is a TextLabel with target text, print its text
-                                print("Found TextLabel in TabArea with text:", tabButton.Text)
-                            end
-                        end
-                    elseif tabArea:IsA("TextLabel") and targetTexts[tabArea.Text] then
-                        -- If tabArea itself is a TextLabel with target text, print its text
-                        print("Found TextLabel in MainSection with text:", tabArea.Text, tabArea:GetDebugId())
-                    end
-                end
-            elseif mainSection:IsA("TextLabel") and targetTexts[mainSection.Text] then
-                -- If mainSection itself is a TextLabel with target text, print its text
-                print("Found TextLabel in Registry with text:", mainSection.Text)
-            end
-        end
-        return nil -- Return nil if MainSectionInner is not found
-    end
-
-    -- Usage
-    local targetText = "Addons [BETA]"
-    local mainSectionInner = FindMainSectionInner(targetText)
-    if mainSectionInner then
-        print("Found MainSectionInner:", mainSectionInner.Instance.Name)
-    else
-        print("MainSectionInner not found.")
-    end
-
-    -- Recursive function to print names of all children and their descendants
-    local function printChildrenNames(parent)
-        for _, child in ipairs(parent:GetChildren()) do
-            print(child.Name)  -- Print the name of the current child
-
-            printChildrenNames(child)
-
-            if child:IsA("TextLabel") then
-                print(child.Text);
+    -- Function to rename the GroupBox label text
+    local function renameGroupbox(groupbox, newName)
+        -- Find the GroupboxLabel within the groupbox container
+        for _, child in ipairs(groupbox.Container.Parent:GetChildren()) do
+            if child:IsA("TextLabel") and child.TextSize == 14 and child.Position == UDim2.new(0, 4, 0, 2) then
+                child.Text = newName  -- Update the label text
+                print("Groupbox label renamed to:", newName)
+                break
             end
         end
     end
+
+    renameGroupbox(ClearItemsGroupBox, "FUCK YEAH!!! IT WOOOORKS!!!!!!")
+    3
 
     -- Delete button if in manual setup
     if isManualSetup then
@@ -95,7 +48,7 @@ local function setupAddon(isManualSetup)
     end
 
     ClearItemsGroupBox:AddToggle('MyToggle', {
-        Text = 'Update 9.666.665375!',
+        Text = 'Update 9.666.6654!',
         Default = true,
         Tooltip = 'This is a tooltip',
 
