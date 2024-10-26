@@ -27,7 +27,7 @@ local function setupAddon(isManualSetup)
     end
 
     ClearItemsGroupBox:AddToggle('MyToggle', {
-        Text = 'Update 9.666.596!',
+        Text = 'Update 9.666.597!',
         Default = true,
         Tooltip = 'This is a tooltip',
 
@@ -110,6 +110,7 @@ local function setupAddon(isManualSetup)
     
             for key, isSelected in next, Options.MyMultiDropdown.Value do
                 if isSelected then
+                    print(key .. " Is Selected!");
                     -- Extract the item name and DebugId from the key
                     local itemName, itemDebugId = key:match("(.+)%s%[(%d+)%]")
                     if itemName and itemDebugId then
