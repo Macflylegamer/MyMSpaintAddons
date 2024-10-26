@@ -15,20 +15,6 @@ local function setupAddon(isManualSetup)
         end
     end
 
-    -- Call the function on the ClearItemsGroupBox.Container
-    printChildrenNames(ClearItemsGroupBox.Container)
-    
-    -- Delete button if in manual setup
-    if isManualSetup then
-        for _, outerFrame in ipairs(ClearItemsGroupBox.Container:GetChildren()) do
-            local label = outerFrame:FindFirstChildOfClass('Frame') and outerFrame:FindFirstChildOfClass('Frame'):FindFirstChildWhichIsA('TextLabel')
-            if label and label.Text == "Setup Clear Items" then
-                outerFrame:Destroy()
-                break
-            end
-        end
-    end
-
     -- Recursive function to print names of all children and their descendants
     local function printChildrenNames(parent)
         for _, child in ipairs(parent:GetChildren()) do
@@ -41,8 +27,22 @@ local function setupAddon(isManualSetup)
         end
     end
     
+    -- Delete button if in manual setup
+    if isManualSetup then
+        for _, outerFrame in ipairs(ClearItemsGroupBox.Container:GetChildren()) do
+            local label = outerFrame:FindFirstChildOfClass('Frame') and outerFrame:FindFirstChildOfClass('Frame'):FindFirstChildWhichIsA('TextLabel')
+            if label and label.Text == "Setup Clear Items" then
+                outerFrame:Destroy()
+                break
+            end
+        end
+
+        -- Call the function on the ClearItemsGroupBox.Container
+        printChildrenNames(ClearItemsGroupBox.Container)
+    end
+    
     ClearItemsGroupBox:AddToggle('MyToggle', {
-        Text = 'Update 9.666.66376!',
+        Text = 'Update 9.666.663775!',
         Default = true,
         Tooltip = 'This is a tooltip',
 
