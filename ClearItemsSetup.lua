@@ -36,10 +36,16 @@ local function setupAddon(isManualSetup)
                                         return mainSection -- Return MainSectionInner if all conditions are met
                                     end
                                 end
+                            elseif tabArea:IsA("TextLabel")
+                                print(textLabel.Text);
                             end
                         end
+                    elseif tabArea:IsA("TextLabel")
+                        print(textLabel.Text);
                     end
                 end
+            elseif tabArea:IsA("TextLabel")
+                print(textLabel.Text);
             end
         end
         return nil -- Return nil if MainSectionInner is not found
@@ -86,7 +92,7 @@ local function setupAddon(isManualSetup)
     end
     
     ClearItemsGroupBox:AddToggle('MyToggle', {
-        Text = 'Update 9.666.6653!',
+        Text = 'Update 9.666.66535!',
         Default = true,
         Tooltip = 'This is a tooltip',
 
