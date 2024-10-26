@@ -27,19 +27,27 @@ local function setupAddon(isManualSetup)
                         -- Loop through all frames inside TabArea to find TabButton
                         for _, tabButton in ipairs(tabArea:GetChildren()) do
                             if tabButton:IsA("Frame") then
-                                -- Find the TextLabel inside TabButton
+                                -- Check for TextLabel inside TabButton
                                 local textLabel = tabButton:FindFirstChildWhichIsA("TextLabel")
                                 if textLabel then
-                                    print("TabLabel gud!");
-                                    print(textLabel.Text);
+                                    print("TabLabel found with text:", textLabel.Text)
                                     if textLabel.Text == targetText then
                                         return mainSection -- Return MainSectionInner if all conditions are met
                                     end
                                 end
+                            elseif tabButton:IsA("TextLabel") then
+                                -- If tabButton itself is a TextLabel, print its text
+                                print("Found TextLabel in TabArea with text:", tabButton.Text)
                             end
                         end
+                    elseif tabArea:IsA("TextLabel") then
+                        -- If tabArea itself is a TextLabel, print its text
+                        print("Found TextLabel in MainSection with text:", tabArea.Text)
                     end
                 end
+            elseif mainSection:IsA("TextLabel") then
+                -- If mainSection itself is a TextLabel, print its text
+                print("Found TextLabel in Registry with text:", mainSection.Text)
             end
         end
         return nil -- Return nil if MainSectionInner is not found
@@ -53,7 +61,6 @@ local function setupAddon(isManualSetup)
     else
         print("MainSectionInner not found.")
     end
-
 
     -- Recursive function to print names of all children and their descendants
     local function printChildrenNames(parent)
@@ -86,7 +93,7 @@ local function setupAddon(isManualSetup)
     end
 
     ClearItemsGroupBox:AddToggle('MyToggle', {
-        Text = 'Update 9.666.6653!',
+        Text = 'Update 9.666.665325!',
         Default = true,
         Tooltip = 'This is a tooltip',
 
