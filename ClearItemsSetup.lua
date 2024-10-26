@@ -15,22 +15,39 @@ local function setupAddon(isManualSetup)
         end
     end
 
-    function FindTabContainer()
-        for _, data in ipairs(shared.Library.Registry) do
-            print(data.Instance.Name);
-            if data.Instance.Name == "TabContainer" then  -- Assuming you have a name or some unique property
-                return data.Instance
+    function FindMainSectionInner(targetText)
+        for _, data in ipairs(Library.Registry) do
+            local mainSection = data.Instance
+
+            -- Check if the instance is a Frame (potential MainSectionInner)
+            if mainSection:IsA("Frame") then
+                -- Loop through all frames inside MainSectionInner to find TabArea
+                for _, tabArea in ipairs(mainSection:GetChildren()) do
+                    if tabArea:IsA("Frame") then
+                        -- Loop through all frames inside TabArea to find TabButton
+                        for _, tabButton in ipairs(tabArea:GetChildren()) do
+                            if tabButton:IsA("Frame") then
+                                -- Find the TextLabel inside TabButton
+                                local textLabel = tabButton:FindFirstChildWhichIsA("TextLabel")
+                                if textLabel and textLabel.Text == targetText then
+                                    return mainSection -- Return MainSectionInner if all conditions are met
+                                end
+                            end
+                        end
+                    end
+                end
             end
         end
-        return nil  -- Return nil if not found
+        return nil -- Return nil if MainSectionInner is not found
     end
 
     -- Usage
-    local TabContainer = FindTabContainer()
-    if TabContainer then
-        print("Found TabContainer:", TabContainer)
+    local targetText = "Addons [BETA]"
+    local mainSectionInner = FindMainSectionInner(targetText)
+    if mainSectionInner then
+        print("Found MainSectionInner:", mainSectionInner.Instance.Name)
     else
-        print("TabContainer not found.")
+        print("MainSectionInner not found.")
     end
 
 
@@ -65,7 +82,7 @@ local function setupAddon(isManualSetup)
     end
     
     ClearItemsGroupBox:AddToggle('MyToggle', {
-        Text = 'Update 9.666.66465!',
+        Text = 'Update 9.666.665!',
         Default = true,
         Tooltip = 'This is a tooltip',
 
