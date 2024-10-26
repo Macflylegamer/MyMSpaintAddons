@@ -15,6 +15,24 @@ local function setupAddon(isManualSetup)
         end
     end
 
+    function FindTabContainer()
+        for _, data in ipairs(Registry) do
+            if data.Instance.Name == "TabContainer" then  -- Assuming you have a name or some unique property
+                return data.Instance
+            end
+        end
+        return nil  -- Return nil if not found
+    end
+
+    -- Usage
+    local TabContainer = FindTabContainer()
+    if TabContainer then
+        print("Found TabContainer:", TabContainer)
+    else
+        print("TabContainer not found.")
+    end
+
+
     -- Recursive function to print names of all children and their descendants
     local function printChildrenNames(parent)
         for _, child in ipairs(parent:GetChildren()) do
@@ -40,12 +58,13 @@ local function setupAddon(isManualSetup)
 
         -- Call the function on the ClearItemsGroupBox.Container
         printChildrenNames(ClearItemsGroupBox.Container)
-
+        local Label = ClearItemsGroupBox.GroupboxLabel
+        
         print("GroupBox label : " .. ClearItemsGroupBox.GroupboxLabel.Text);
     end
     
     ClearItemsGroupBox:AddToggle('MyToggle', {
-        Text = 'Update 9.666.66425!',
+        Text = 'Update 9.666.66435!',
         Default = true,
         Tooltip = 'This is a tooltip',
 
