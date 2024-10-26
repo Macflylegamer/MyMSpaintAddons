@@ -38,16 +38,10 @@ local function setupAddon(isManualSetup)
                 break
             end
         end
-
-        -- Call the function on the ClearItemsGroupBox.Container
-        printChildrenNames(ClearItemsGroupBox.Container)
-        local Label = ClearItemsGroupBox.GroupboxLabel
-
-        print("GroupBox label : " .. ClearItemsGroupBox.GroupboxLabel.Text);
     end
 
     ClearItemsGroupBox:AddToggle('MyToggle', {
-        Text = 'Update 9.666.665415!',
+        Text = 'Update 9.666.66542!',
         Default = true,
         Tooltip = 'This is a tooltip',
 
