@@ -33,7 +33,7 @@ local function setupAddon(isManualSetup)
     local function changeLabelText(groupbox, originalText, newText)
         -- Find the Label within the groupbox container
         for _, child in ipairs(groupbox.Container.Parent:GetChildren()) do
-            if child:IsA("TextLabel")
+            if child:IsA("TextLabel") then
                 print(child.Text);
             end
             if child:IsA("TextLabel") and child.Text == originalText then
