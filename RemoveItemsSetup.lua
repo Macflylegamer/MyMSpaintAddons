@@ -38,6 +38,11 @@ local function setupAddon(isManualSetup)
             end
             if child:IsA("TextLabel") and child.Text == originalText then
                 child.Text = newText  -- Update the label text
+                -- Adjust the TextLabel size dynamically based on text bounds
+                local textSizeY = select(2, Library:GetTextBounds(newText, Library.Font, 14, Vector2.new(child.AbsoluteSize.X, math.huge)))
+                child.Size = UDim2.new(1, -4, 0, textSizeY)
+                groupbox:Resize()  -- Resize the Groupbox to fit the new label size
+                
                 print("Label text changed to:", newText)
                 break
             end
@@ -58,7 +63,7 @@ local function setupAddon(isManualSetup)
     end
 
     RemoveItemsGroupBox:AddToggle('MyToggle', {
-        Text = 'Update 9.666.665825!',
+        Text = 'Update 9.666.6659!',
         Default = true,
         Tooltip = 'This is a tooltip',
 
