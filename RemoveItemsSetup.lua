@@ -41,7 +41,7 @@ local function setupAddon(isManualSetup)
         end
     end
 
-    renameGroupbox(RemoveItemsGroupBox, "The manual setup of my addon (cuz dropdown doesn't work without this)", "This addon removes the selected items from your inventory")
+    changeLabelText(RemoveItemsGroupBox, "The manual setup of my addon (cuz dropdown doesn't work without this)", "This addon removes the selected items from your inventory")
 
     -- Delete button if in manual setup
     if isManualSetup then
@@ -55,7 +55,7 @@ local function setupAddon(isManualSetup)
     end
 
     RemoveItemsGroupBox:AddToggle('MyToggle', {
-        Text = 'Update 9.666.6655!',
+        Text = 'Update 9.666.66575!',
         Default = true,
         Tooltip = 'This is a tooltip',
 
