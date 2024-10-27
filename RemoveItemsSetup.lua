@@ -7,11 +7,11 @@ local function setupAddon(isManualSetup)
     print(isManualSetup)
 
     local mode = isManualSetup and "Manual" or "Auto"
-    local ClearItemsGroupBox
+    local RemoveItemsGroupBox
 
     for groupName, groupbox in pairs(Tabs.AddonTab.Groupboxes) do
-        if groupName == "Clear Items " .. mode .. " Setup" then
-            ClearItemsGroupBox = groupbox
+        if groupName == "Remove Items " .. mode .. " Setup" then
+            RemoveItemsGroupBox = groupbox
         end
     end
 
@@ -27,21 +27,35 @@ local function setupAddon(isManualSetup)
         end
     end
 
-    renameGroupbox(ClearItemsGroupBox, "FUCK YEAH!!! IT WOOOORKS!!!!!!")
+    renameGroupbox(RemoveItemsGroupBox, "Remove Items")
+
+    -- Function to change the text of an added label
+    local function changeLabelText(groupbox, originalText, newText)
+        -- Find the Label within the groupbox container
+        for _, child in ipairs(groupbox.Container.Parent:GetChildren()) do
+            if child:IsA("TextLabel") and child.Text == originalText then
+                child.Text = newText  -- Update the label text
+                print("Label text changed to:", newText)
+                break
+            end
+        end
+    end
+
+    renameGroupbox(RemoveItemsGroupBox, "The manual setup of my addon (cuz dropdown doesn't work without this)", "This addon removes the selected items from your inventory")
 
     -- Delete button if in manual setup
     if isManualSetup then
-        for _, outerFrame in ipairs(ClearItemsGroupBox.Container:GetChildren()) do
+        for _, outerFrame in ipairs(RemoveItemsGroupBox.Container:GetChildren()) do
             local label = outerFrame:FindFirstChildOfClass('Frame') and outerFrame:FindFirstChildOfClass('Frame'):FindFirstChildWhichIsA('TextLabel')
-            if label and label.Text == "Setup Clear Items" then
+            if label and label.Text == "Setup Remove Items" then
                 outerFrame:Destroy()
                 break
             end
         end
     end
 
-    ClearItemsGroupBox:AddToggle('MyToggle', {
-        Text = 'Update 9.666.66542!',
+    RemoveItemsGroupBox:AddToggle('MyToggle', {
+        Text = 'Update 9.666.6655!',
         Default = true,
         Tooltip = 'This is a tooltip',
 
@@ -85,7 +99,7 @@ local function setupAddon(isManualSetup)
     local selectedItems = {}
 
     -- Multi dropdown for item deletion
-    ClearItemsGroupBox:AddDropdown('MyMultiDropdown', {
+    RemoveItemsGroupBox:AddDropdown('MyMultiDropdown', {
         Values = {},  -- Populated dynamically
         Default = 1,
         Multi = true,
@@ -110,7 +124,7 @@ local function setupAddon(isManualSetup)
     end)
 
     -- Button to delete selected items
-    local DeleteSelectedItemsButton = ClearItemsGroupBox:AddButton({
+    local DeleteSelectedItemsButton = RemoveItemsGroupBox:AddButton({
         Text = 'Delete Selected Items', 
         Func = function()
             local player = game.Players.LocalPlayer
