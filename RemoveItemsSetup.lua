@@ -59,7 +59,7 @@ local function setupAddon(isManualSetup)
 
     -- Usage:
     updateLabel(RemoveItemsGroupBox, nil, "Remove Items", { isGroupboxLabel = true, resize = false })  -- Rename GroupBox label
-    updateLabel(RemoveItemsGroupBox, "The manual setup of my addon (cuz dropdown doesn't work without this)", 
+    updateLabel(RemoveItemsGroupBox, "The " .. string.lower(mode) .. " setup of my addon (cuz dropdown doesn't work without this)", 
                 "This addon removes the selected items from your inventory", 
                 { isGroupboxLabel = false, resize = true })  -- Change specific label text and resize
     updateLabel(RemoveItemsGroupBox, "Setup Remove Items", "", { isGroupboxLabel = false, delete = true })  -- Delete specific button
