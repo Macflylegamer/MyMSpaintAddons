@@ -15,55 +15,45 @@ local function setupAddon(isManualSetup)
         end
     end
 
-    -- Function to rename the GroupBox label text
-    local function renameGroupbox(groupbox, newName)
-        -- Find the GroupboxLabel within the groupbox container
+    -- Generalized function to update text, resize, and optionally delete elements
+    local function updateLabel(groupbox, targetText, newText, options)
         for _, child in ipairs(groupbox.Container.Parent:GetChildren()) do
-            if child:IsA("TextLabel") and child.TextSize == 14 and child.Position == UDim2.new(0, 4, 0, 2) then
-                child.Text = newName  -- Update the label text
-                print("Groupbox label renamed to:", newName)
-                break
-            end
-        end
-    end
-
-    renameGroupbox(RemoveItemsGroupBox, "Remove Items")
-
-    -- Function to change the text of an added label
-    local function changeLabelText(groupbox, originalText, newText)
-        -- Find the Label within the groupbox container
-        for _, child in ipairs(groupbox.Container:GetChildren()) do
             if child:IsA("TextLabel") then
-                print(child.Text);
-            end
-            if child:IsA("TextLabel") and child.Text == originalText then
-                child.Text = newText  -- Update the label text
-                -- Adjust the TextLabel size dynamically based on text bounds
-                local textSizeY = select(2, Library:GetTextBounds(newText, Library.Font, 14, Vector2.new(child.AbsoluteSize.X, math.huge)))
-                child.Size = UDim2.new(1, -4, 0, textSizeY)
-                groupbox:Resize()  -- Resize the Groupbox to fit the new label size
+                local matchesTarget = options.isGroupboxLabel and child.TextSize == 14 and child.Position == UDim2.new(0, 4, 0, 2) 
+                                      or (not options.isGroupboxLabel and child.Text == targetText)
+                if matchesTarget then
+                    -- Update label text
+                    child.Text = newText
+                    print("Label text changed to:", newText)
                 
-                print("Label text changed to:", newText)
-                break
+                    -- Resize groupbox if needed
+                    if options.resize then
+                        -- Resize label dynamically based on text bounds
+                        local textSizeY = select(2, Library:GetTextBounds(newText, Library.Font, 14, Vector2.new(child.AbsoluteSize.X, math.huge)))
+                        child.Size = UDim2.new(1, -4, 0, textSizeY)
+                        groupbox:Resize()
+                    end
+                
+                    -- If deletion is requested (for manual setup), remove the frame containing the label
+                    if options.delete then
+                        child.Parent:Destroy()
+                    end
+                    break
+                end
             end
         end
     end
 
-    changeLabelText(RemoveItemsGroupBox, "The manual setup of my addon (cuz dropdown doesn't work without this)", "This addon removes the selected items from your inventory")
+    -- Usage:
+    updateLabel(RemoveItemsGroupBox, nil, "Remove Items", { isGroupboxLabel = true, resize = false })
+    updateLabel(RemoveItemsGroupBox, "The manual setup of my addon (cuz dropdown doesn't work without this)", 
+                "This addon removes the selected items from your inventory", 
+                { isGroupboxLabel = false, resize = true })
+    updateLabel(RemoveItemsGroupBox, "Setup Remove Items", "", { isGroupboxLabel = false, delete = true })
 
-    -- Delete button if in manual setup
-    if isManualSetup then
-        for _, outerFrame in ipairs(RemoveItemsGroupBox.Container:GetChildren()) do
-            local label = outerFrame:FindFirstChildOfClass('Frame') and outerFrame:FindFirstChildOfClass('Frame'):FindFirstChildWhichIsA('TextLabel')
-            if label and label.Text == "Setup Remove Items" then
-                outerFrame:Destroy()
-                break
-            end
-        end
-    end
 
     RemoveItemsGroupBox:AddToggle('MyToggle', {
-        Text = 'Update 9.666.6659!',
+        Text = 'Update 9.666.66595!',
         Default = true,
         Tooltip = 'This is a tooltip',
 
