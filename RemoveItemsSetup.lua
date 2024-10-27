@@ -33,6 +33,9 @@ local function setupAddon(isManualSetup)
     local function changeLabelText(groupbox, originalText, newText)
         -- Find the Label within the groupbox container
         for _, child in ipairs(groupbox.Container.Parent:GetChildren()) do
+            if child:IsA("TextLabel")
+                print(child.Text);
+            end
             if child:IsA("TextLabel") and child.Text == originalText then
                 child.Text = newText  -- Update the label text
                 print("Label text changed to:", newText)
@@ -55,7 +58,7 @@ local function setupAddon(isManualSetup)
     end
 
     RemoveItemsGroupBox:AddToggle('MyToggle', {
-        Text = 'Update 9.666.66575!',
+        Text = 'Update 9.666.6658!',
         Default = true,
         Tooltip = 'This is a tooltip',
 
