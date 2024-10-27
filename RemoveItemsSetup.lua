@@ -64,16 +64,6 @@ local function setupAddon(isManualSetup)
                 { isGroupboxLabel = false, resize = true })  -- Change specific label text and resize
     updateLabel(RemoveItemsGroupBox, "Setup Remove Items", "", { isGroupboxLabel = false, delete = true })  -- Delete specific button
 
-    RemoveItemsGroupBox:AddToggle('MyToggle', {
-        Text = 'Update 9.66666!',
-        Default = true,
-        Tooltip = 'This is a tooltip',
-
-        Callback = function(Value)
-            print('[cb] MyToggle changed to:', Value)
-        end
-    })
-
     -- Function to update the dropdown list
     local function UpdateDropdown()
         local player = game.Players.LocalPlayer
