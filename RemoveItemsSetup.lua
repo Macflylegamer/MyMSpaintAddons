@@ -17,24 +17,29 @@ local function setupAddon(isManualSetup)
 
     -- Generalized function to update text, resize, and optionally delete elements
     local function updateLabel(groupbox, targetText, newText, options)
-        for _, child in ipairs(groupbox.Container.Parent:GetChildren()) do
+        -- Determine the search scope based on whether it's the GroupBox label or a regular label
+        local searchContainer = options.isGroupboxLabel and groupbox.Container.Parent or groupbox.Container
+    
+        for _, child in ipairs(searchContainer:GetChildren()) do
             if child:IsA("TextLabel") then
-                local matchesTarget = options.isGroupboxLabel and child.TextSize == 14 and child.Position == UDim2.new(0, 4, 0, 2) 
-                                      or (not options.isGroupboxLabel and child.Text == targetText)
+                local matchesTarget = options.isGroupboxLabel and child.TextSize == 14 and child.Position == UDim2.new(0, 4, 0, 2)
+                                    or (not options.isGroupboxLabel and child.Text == targetText)
+            
                 if matchesTarget then
-                    -- Update label text
-                    child.Text = newText
-                    print("Label text changed to:", newText)
-                
-                    -- Resize groupbox if needed
-                    if options.resize then
-                        -- Resize label dynamically based on text bounds
-                        local textSizeY = select(2, Library:GetTextBounds(newText, Library.Font, 14, Vector2.new(child.AbsoluteSize.X, math.huge)))
-                        child.Size = UDim2.new(1, -4, 0, textSizeY)
-                        groupbox:Resize()
+                    -- Update label text if a new one is provided
+                    if newText and newText ~= "" then
+                        child.Text = newText
+                        print("Label text changed to:", newText)
+                    
+                        -- Resize label dynamically if specified
+                        if options.resize then
+                            local textSizeY = select(2, Library:GetTextBounds(newText, Library.Font, 14, Vector2.new(child.AbsoluteSize.X, math.huge)))
+                            child.Size = UDim2.new(1, -4, 0, textSizeY)
+                            groupbox:Resize()
+                        end
                     end
                 
-                    -- If deletion is requested (for manual setup), remove the frame containing the label
+                    -- Delete the label's parent frame if deletion is requested
                     if options.delete then
                         child.Parent:Destroy()
                     end
@@ -45,15 +50,15 @@ local function setupAddon(isManualSetup)
     end
 
     -- Usage:
-    updateLabel(RemoveItemsGroupBox, nil, "Remove Items", { isGroupboxLabel = true, resize = false })
+    updateLabel(RemoveItemsGroupBox, nil, "Remove Items", { isGroupboxLabel = true, resize = false })  -- Rename GroupBox label
     updateLabel(RemoveItemsGroupBox, "The manual setup of my addon (cuz dropdown doesn't work without this)", 
                 "This addon removes the selected items from your inventory", 
-                { isGroupboxLabel = false, resize = true })
-    updateLabel(RemoveItemsGroupBox, "Setup Remove Items", "", { isGroupboxLabel = false, delete = true })
+                { isGroupboxLabel = false, resize = true })  -- Change specific label text and resize
+    updateLabel(RemoveItemsGroupBox, "Setup Remove Items", "", { isGroupboxLabel = false, delete = true })  -- Delete specific button
 
 
     RemoveItemsGroupBox:AddToggle('MyToggle', {
-        Text = 'Update 9.666.66595!',
+        Text = 'Update 9.666.665975!',
         Default = true,
         Tooltip = 'This is a tooltip',
 
