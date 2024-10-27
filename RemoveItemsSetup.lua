@@ -42,6 +42,7 @@ local function setupAddon(isManualSetup)
                     -- Delete the label's parent frame if deletion is requested
                     if options.delete then
                         child.Parent:Destroy()
+                        print("Button deleted with text:", targetText)
                     end
                     break
                 end
@@ -57,8 +58,9 @@ local function setupAddon(isManualSetup)
     updateLabel(RemoveItemsGroupBox, "Setup Remove Items", "", { isGroupboxLabel = false, delete = true })  -- Delete specific button
 
 
+
     RemoveItemsGroupBox:AddToggle('MyToggle', {
-        Text = 'Update 9.666.665975!',
+        Text = 'Update 9.666.666!',
         Default = true,
         Tooltip = 'This is a tooltip',
 
